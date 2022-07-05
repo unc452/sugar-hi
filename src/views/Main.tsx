@@ -29,6 +29,8 @@ const MainSection = styled.div`
   display: flex;
 
   height: 90vh;
+
+  justify-content: center;
 `;
 
 const SecondSection = styled.div`
@@ -40,27 +42,35 @@ const SecondSection = styled.div`
 
 const Char1 = styled.img`
   top: 100px;
+  margin: 0px 0px 0px -50px;
   position: absolute;
 
   transition: all 0.3s ease-out;
   
-  max-width: 600px;
+  width: 750px;
 
   @media (max-width: 768px) {
-    max-width: 500px;
+    top: 100px;
+    margin: 0px 0px 0px -10vw;
+    width: 500px;
   }
 `;
 
 const Char2 = styled.img`
-  top: 100px;
+  top: 320px;
+  margin: 0px 0px 0px 230px;
   position: absolute;
+  overflow: hidden;
+  object-fit: cover;
 
   transition: all 0.3s ease-out;
   
-  max-width: 450px;
+  width: 550px;
 
   @media (max-width: 768px) {
-    max-width: 500px;
+    top: 250px;
+    margin: 0px 0px 0px 40vw;
+    width: 380px;
   }
 `;
 
