@@ -1,3 +1,10 @@
 {
-  "main": {}
+  "header": {
+    "story": "스토리",
+    "member": "멤버",
+    "news": "뉴스"
+  },
+  "main": {
+    "title": "슈가하이"
+  }
 }
