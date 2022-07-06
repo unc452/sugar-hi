@@ -59,14 +59,12 @@ const SecondSection = styled.div`
   z-index: 3;
 `;
 
-const Char1 = styled.img<CharacterProps>`
+const Char1 = styled.img`
   top: 20px;
-  margin: 0px 0px 0px -50px;
+  margin: 0px 0px 0px -40px;
   position: absolute;
   display: flex;
-  
-  transition: all 0.3s ease-out;
-  
+
   width: 750px;
 
   @media (max-width: 768px) {
@@ -77,14 +75,11 @@ const Char1 = styled.img<CharacterProps>`
 
 `;
 
-const Char2 = styled.img<CharacterProps>`
+const Char2 = styled.img`
   top: 240px;
-  margin: 0px 0px 0px 230px;
+  margin: 0px 0px 0px 290px;
   position: absolute;
-
-  transform: ${({ mask }) => `translate(${mask.x}px, ${mask.y}px)`};
-
-  transition: all 0.3s ease-out;
+  display: flex;
   
   width: 550px;
 
@@ -101,25 +96,29 @@ const Main: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mask, setMask] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
-  const _onMouseMove = (e: { nativeEvent: { offsetX: number; offsetY: number; }; }) => {
+  const _onMouseMove = (e: any) => {
     const width = containerRef.current?.clientWidth;
     const height = containerRef.current?.clientHeight;
 
     if (width && height) {
-      const x = -(e.nativeEvent.offsetX / width * 10 - 20);
-      const y = -(e.nativeEvent.offsetY / height * 10 - 20);
+      const x = -(e.screenX / width * 20 - 10);
+      const y = -(e.screenY / height * 20 - 10);
 
       setMask({ x, y });
     }
   }
 
+  window.addEventListener('mousemove', _onMouseMove);
+
   return (
-    <Container onMouseMove={_onMouseMove} ref={containerRef}>
-      <Content >
+    <Container ref={containerRef}>
+      <Content>
         <Header />
-        <MainSection>
-          <Char1 src={Character1} alt="character1" mask={mask} />
-          <Char2 src={Character2} alt="character2" mask={mask} />
+        <MainSection style={{
+          transform: `translate(${mask.x}px, ${mask.y}px)`,
+        }}>
+          <Char1 src={Character1} alt="character1" />
+          <Char2 src={Character2} alt="character2" />
         </MainSection>
       </Content>
       <SecondSection>
