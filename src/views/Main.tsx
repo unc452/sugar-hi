@@ -61,7 +61,7 @@ const SecondSection = styled.div`
 
 const Char1 = styled.img`
   top: 20px;
-  margin: 0px 0px 0px -40px;
+  margin: 0px 0px 0px -80px;
   position: absolute;
   display: flex;
 
@@ -96,13 +96,13 @@ const Main: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mask, setMask] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
-  const _onMouseMove = (e: any) => {
+  const _onMouseMove = (event: any) => {
     const width = containerRef.current?.clientWidth;
     const height = containerRef.current?.clientHeight;
 
     if (width && height) {
-      const x = -(e.screenX / width * 20 - 10);
-      const y = -(e.screenY / height * 20 - 10);
+      const x = (event.clientX / width) * 2 - 1;
+      const y = (event.clientY / height) * 2 - 1;
 
       setMask({ x, y });
     }
@@ -115,7 +115,7 @@ const Main: React.FC = () => {
       <Content>
         <Header />
         <MainSection style={{
-          transform: `translate(${mask.x}px, ${mask.y}px)`,
+          transform: `translate(${mask.x}em, ${mask.y}em)`,
         }}>
           <Char1 src={Character1} alt="character1" />
           <Char2 src={Character2} alt="character2" />
