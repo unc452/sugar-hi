@@ -23,7 +23,7 @@ const Title = styled.img`
 	transition: all 0.3s ease-out;
 
 	@media (max-width: 768px) {
-		width: 160px;
+		width: 150px;
 	}
 `;
 
@@ -57,6 +57,7 @@ const TabItem = styled(Link)`
 
 	@media (max-width: 768px) {
 		font-size: 1rem;
+    padding: 8px 2.5vw;
 
 		&:hover {
 			font-size: 1.1rem;
@@ -70,9 +71,9 @@ const Header: React.FC = () => {
     <Container>
       <Title src={Logo} alt={t("main.title")}/>	
       <SubHeader>
-        <TabItem to={"/story"}>{t("header.story")}</TabItem>
-        <TabItem to={"/member"}>{t("header.member")}</TabItem>
-        <TabItem to={"/news"}>{t("header.news")}</TabItem>
+        <TabItem to={"#story"}>{t("header.story")}</TabItem>
+        <TabItem to={"#member"}>{t("header.member")}</TabItem>
+        <TabItem to={"#news"}>{t("header.news")}</TabItem>
       </SubHeader>
     </Container>
   );
