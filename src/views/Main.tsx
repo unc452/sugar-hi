@@ -1,6 +1,6 @@
-import React from "react";
-import {Scrollbar} from "smooth-scrollbar-react";
-import {useTranslation} from "react-i18next";
+import React, { useRef, useState } from "react";
+import { Scrollbar } from "smooth-scrollbar-react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import Header from "../components/Header";
@@ -25,74 +25,109 @@ const Content = styled.div`
   padding: 0px 1.5rem;
 `;
 
+type CharacterProps = {
+  mask: {
+    x: number;
+    y: number;
+  };
+};
+
 const MainSection = styled.div`
   display: flex;
+  position: relative;
+  z-index: 1;
 
-  height: 90vh;
+  height: 100vh;
+  min-height: 800px;
+  max-height: 1100px;
 
   justify-content: center;
+
+  @media (max-width: 768px) {
+    min-height: 660px;
+    max-height: 850px;
+    height: 90vh;
+  }
 `;
 
 const SecondSection = styled.div`
+  position: relative;
   display: flex;
   height: 100vh;
 
   background: #efefef;
+  z-index: 3;
 `;
 
-const Char1 = styled.img`
-  top: 100px;
+const Char1 = styled.img<CharacterProps>`
+  top: 20px;
   margin: 0px 0px 0px -50px;
   position: absolute;
-
+  display: flex;
+  
   transition: all 0.3s ease-out;
   
   width: 750px;
 
   @media (max-width: 768px) {
-    top: 100px;
+    top: 20px;
     margin: 0px 0px 0px -10vw;
     width: 500px;
   }
+
 `;
 
-const Char2 = styled.img`
-  top: 320px;
+const Char2 = styled.img<CharacterProps>`
+  top: 240px;
   margin: 0px 0px 0px 230px;
   position: absolute;
-  overflow: hidden;
-  object-fit: cover;
+
+  transform: ${({ mask }) => `translate(${mask.x}px, ${mask.y}px)`};
 
   transition: all 0.3s ease-out;
   
   width: 550px;
 
   @media (max-width: 768px) {
-    top: 250px;
-    margin: 0px 0px 0px 40vw;
+    top: 170px;
+    margin: 0px 0px 0px 35vw;
     width: 380px;
   }
 `;
 
 const Main: React.FC = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mask, setMask] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
+
+  const _onMouseMove = (e: { nativeEvent: { offsetX: number; offsetY: number; }; }) => {
+    const width = containerRef.current?.clientWidth;
+    const height = containerRef.current?.clientHeight;
+
+    if (width && height) {
+      const x = -(e.nativeEvent.offsetX / width * 10 - 20);
+      const y = -(e.nativeEvent.offsetY / height * 10 - 20);
+
+      setMask({ x, y });
+    }
+  }
+
   return (
-    <Scrollbar>
-      <Container>
+    <Container onMouseMove={_onMouseMove} ref={containerRef}>
+      <Content >
+        <Header />
+        <MainSection>
+          <Char1 src={Character1} alt="character1" mask={mask} />
+          <Char2 src={Character2} alt="character2" mask={mask} />
+        </MainSection>
+      </Content>
+      <SecondSection>
         <Content>
-          <Header />
-          <MainSection>
-            <Char1 src={Character1} alt="character1" />
-            <Char2 src={Character2} alt="character2" />
-          </MainSection>
+
         </Content>
-        <SecondSection>
-          <Content>
-            
-          </Content>
-        </SecondSection>
-      </Container>
-    </Scrollbar>
+      </SecondSection>
+    </Container>
   );
 };
 
