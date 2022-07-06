@@ -14,23 +14,17 @@ const Container = styled.div`
   background-color: #dfdfdf;
 
   background-image: url(${BackgroundImage});
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: max(105vw, 105vh) max(105vw, 105vh);
   background-attachment: fixed;
-  background-position: center;
 `;
 
 const Content = styled.div`
   margin: auto;
   max-width: 768px;
   padding: 0px 1.5rem;
+  overflow: hidden;
 `;
-
-type CharacterProps = {
-  mask: {
-    x: number;
-    y: number;
-  };
-};
 
 const MainSection = styled.div`
   display: flex;
@@ -111,7 +105,10 @@ const Main: React.FC = () => {
   window.addEventListener('mousemove', _onMouseMove);
 
   return (
-    <Container ref={containerRef}>
+    <Container ref={containerRef}  style={{
+      backgroundPositionX: `${mask.x * 0.5 - 1}em`,
+      backgroundPositionY: `${mask.y * 0.5 - 1}em`,
+    }}>
       <Content>
         <Header />
         <MainSection style={{
