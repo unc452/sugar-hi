@@ -63,7 +63,7 @@ const Char1 = styled.img`
 
   @media (max-width: 768px) {
     top: 20px;
-    margin: 0px 0px 0px -10vw;
+    margin: 0px 0px 0px calc(1.5em - 10vw);
     width: 500px;
   }
 
@@ -79,7 +79,7 @@ const Char2 = styled.img`
 
   @media (max-width: 768px) {
     top: 170px;
-    margin: 0px 0px 0px 35vw;
+    margin: 0px 0px 0px calc(8em + 14vw);
     width: 380px;
   }
 `;
