@@ -27,7 +27,7 @@ const Content = styled.div`
 const MainSection = styled.div`
   display: flex;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 
   height: 100vh;
   min-height: 800px;
