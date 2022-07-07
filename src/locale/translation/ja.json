@@ -8,7 +8,8 @@
     "title": "シュガーハイ"
   },
   "story": {
-    "title": "ストーリー"
+    "title": "ストーリー",
+    "description": "ストーリーの説明"
   },
   "member": {
     "title": "メンバー"

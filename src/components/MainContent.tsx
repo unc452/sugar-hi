@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import BackgroundImage from "../assets/background.png";
 import Character1 from "../assets/character/1.png";
 import Character2 from "../assets/character/2.png";
+import StoryContent from "./StoryContent";
+import NewsContent from "./NewsContent";
 
 const Container = styled.div`
   display: block;
@@ -85,7 +87,6 @@ const MainContent: React.FC = () => {
   const {t} = useTranslation();
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const particleRef = useRef<HTMLDivElement>(null);
   const [mask, setMask] = useState<{x: number; y: number}>({x: 0, y: 0});
 
   const _onMouseMove = (event: any) => {
@@ -120,17 +121,11 @@ const MainContent: React.FC = () => {
           <Char2 src={Character2} alt="character2" />
         </MainSection>
       </Content>
-      <SecondSection id="story">
-        <Content>
-          <h1>{t("story.title")}</h1>
-        </Content>
-      </SecondSection>
+      <StoryContent />
       <SecondSection id="member">
         <Content></Content>
       </SecondSection>
-      <SecondSection id="news">
-        <Content></Content>
-      </SecondSection>
+      <NewsContent />
     </Container>
   );
 };
