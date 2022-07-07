@@ -40,31 +40,23 @@ const Main: React.FC = () => {
             number: {
               value: 10
             },
-            "shadow": {
-              blur: 2,
+            stroke: {
+              width: 5,
+              opacity: 0.2,
               color: {
-                value: ["#FFFFFFAA", "#0000002A"]
-              },
-              enable: true
-              
-            },
-            line_linked: {
-              shadow: {
-                enable: true,
-                color: "#000",
-                blur: 5
+                value: "#AAA",
               }
             },
             color: {
               value: ["#1A3A4F", "#519FAB", "#8A92A5", "#FFE3A4", "#F5A67F", "#FF6F6E"]
             },
             size: {
-              value: 80,
+              value: 70,
               random: true,
               anim: {
                 enable: true,
                 speed: 0,
-                size_min: 1,
+                size_min: 20,
                 sync: false
               }
             },
@@ -91,7 +83,13 @@ const Main: React.FC = () => {
               },
             }
           },
-          
+          duration: 0,
+          pauseOnBlur: true,
+          pauseOnOutsideViewport: true,
+          responsive: [],
+          style: {},
+          themes: [],
+          zLayers: 100
         }}
       />
       <MainContent />
