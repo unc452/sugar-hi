@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 
 import Logo from "../assets/logo.png";
 
@@ -11,6 +11,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 	padding: 20px;
+  z-index: 2;
 
 	@media (max-width: 768px) {
 		padding: 20px 0px;
@@ -38,7 +39,7 @@ const SubHeader = styled.div`
 	backdrop-filter: contrast(140%);
 `;
 
-const TabItem = styled(Link)`
+const TabItem = styled(HashLink)`
 	font-size: 1.2rem;
   display: flex;
   color: #333;
@@ -71,9 +72,9 @@ const Header: React.FC = () => {
     <Container>
       <Title src={Logo} alt={t("main.title")}/>	
       <SubHeader>
-        <TabItem to={"#story"}>{t("header.story")}</TabItem>
-        <TabItem to={"#member"}>{t("header.member")}</TabItem>
-        <TabItem to={"#news"}>{t("header.news")}</TabItem>
+        <TabItem smooth to={"#story"}>{t("header.story")}</TabItem>
+        <TabItem smooth to={"#member"}>{t("header.member")}</TabItem>
+        <TabItem smooth to={"#news"}>{t("header.news")}</TabItem>
       </SubHeader>
     </Container>
   );
