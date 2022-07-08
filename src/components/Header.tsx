@@ -6,12 +6,14 @@ import { HashLink } from 'react-router-hash-link';
 import Logo from "../assets/logo.png";
 
 const Container = styled.div`
+
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 	padding: 20px;
-  z-index: 2;
+  z-index: 4;
 
 	@media (max-width: 768px) {
 		padding: 20px 0px;
@@ -34,9 +36,9 @@ const SubHeader = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #FFFFFF0F;
+  background-color: #FFFFFF2F;
 
-	backdrop-filter: contrast(140%);
+	backdrop-filter: blur(10px);
 `;
 
 const TabItem = styled(HashLink)`

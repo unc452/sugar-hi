@@ -16,35 +16,11 @@ const Main: React.FC = () => {
         options={{
           fpsLimit: 120,
           detectRetina: true,
-          emitters: {
-            direction: "top",
-            life: {
-              count: 0,
-              duration: 0.08,
-              delay: 0.1
-            },
-            rate: {
-              delay: 1,
-              quantity: 1
-            },
-            size: {
-              width: 100,
-              height: 0
-            },
-            position: {
-              y: 100,
-              x: 50
-            }
-          },
           particles: {
             number: {
-              value: 10
-            },
-            stroke: {
-              width: 5,
-              opacity: 0.2,
-              color: {
-                value: "#AAA",
+              value: 25,
+              density: {
+                enable: true
               }
             },
             color: {
@@ -53,43 +29,43 @@ const Main: React.FC = () => {
             size: {
               value: 70,
               random: true,
-              anim: {
-                enable: true,
-                speed: 0,
-                size_min: 20,
-                sync: false
-              }
             },
             move: {
               enable: true,
-              straight: false,
               direction: "top",
-              outModes: {
-                default: "destroy",
-                top: "none"
-              },
+              out_mode: "out",
               speed: {
                 min: 0.5,
                 max: 1.5,
               }
             },
+            line_linked: {
+              enable: false
+            },
             opacity: {
-              value: 0.6,
+              value: 0.8,
               anim: {
                 enable: true,
                 speed: 0.1,
-                opacity_min: 0.3,
+                opacity_min: 0.4,
                 sync: false
               },
             }
           },
-          duration: 0,
-          pauseOnBlur: true,
-          pauseOnOutsideViewport: true,
-          responsive: [],
-          style: {},
-          themes: [],
-          zLayers: 100
+          interactivity: {
+            events: {
+              onclick: {
+                enable: false,
+                mode: "repulse"
+              }
+            },
+            modes: {
+              repulse: {
+                distance: 200,
+                duration: 0.4
+              }
+            }
+          }
         }}
       />
       <MainContent />

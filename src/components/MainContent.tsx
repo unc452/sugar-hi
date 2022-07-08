@@ -54,12 +54,13 @@ const SecondSection = styled.div`
 `;
 
 const Char1 = styled.img`
-  top: 20px;
+  top: calc(-30px + 5vh);
   margin: 0px 0px 0px -80px;
   position: absolute;
   display: flex;
 
-  width: 750px;
+	width: 70vw;
+  max-width: 750px;
 
   @media (max-width: 768px) {
     top: 20px;
@@ -69,12 +70,13 @@ const Char1 = styled.img`
 `;
 
 const Char2 = styled.img`
-  top: 240px;
-  margin: 0px 0px 0px 290px;
+  top: calc(210px + 5vh);
+  margin: 0px 0px 0px calc(220px + 5vw);
   position: absolute;
   display: flex;
 
-  width: 550px;
+	width: 50vw;
+  max-width: 550px;
 
   @media (max-width: 768px) {
     top: 170px;
