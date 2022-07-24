@@ -13,23 +13,31 @@ const SecondSection = styled.div`
 const Content = styled.div`
   margin: auto;
   max-width: 768px;
-  padding: 0px 1.5rem;
+  padding: 70px 1.5rem;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 30px 1.5rem;
+  }
 `;
 
 const StoryTitle = styled.h1`
 	flex: 1;
   background-color: #333;
   display: inline-block;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
+  white-space: pre-wrap;
+  line-height: 5.8rem;
 
-	font-size: 1.7rem;
+	font-size: 4.6rem;
 	font-weight: bold;
 	
 	transition: all 0.3s ease;
 
 	@media (max-width: 768px) {
-		font-size: 1.4rem;
+    line-height: 2.6rem;
+		font-size: 1.7rem;
+    padding: 0.25rem 0.7rem;
 	}
 `;
 
@@ -37,7 +45,8 @@ const StoryDescription = styled.p`
   color: #333;
   font-size: 1.25rem;
   white-space: pre-wrap;
-	padding: 0px 0px 0px 7vw;
+  line-height: 1.7rem;
+  margin: 3rem 0px;
 
 	transition: all 0.3s ease;
 

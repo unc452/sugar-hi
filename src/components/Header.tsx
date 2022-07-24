@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.img`
-	width: 250px;
+	width: 320px;
 
 	transition: all 0.3s ease-out;
 
