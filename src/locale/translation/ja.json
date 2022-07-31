@@ -14,7 +14,13 @@
     "fadein_subtitle": "頼むからほっといて…?"
   },
   "member": {
-    "title": "メンバー"
+    "title": "メンバー",
+    "character1": {
+      "name": "ラディ"
+    },
+    "character2": {
+      "name": "サト"
+    }
   },
   "news": {
     "title": "ニュース"

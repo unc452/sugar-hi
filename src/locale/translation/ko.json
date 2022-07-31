@@ -14,7 +14,15 @@
     "fadein_subtitle": "제발 저리 가면 안 될까…?"
   },
   "member": {
-    "title": "멤버"
+    "title": "멤버",
+    "character1": {
+      "name": "라디",
+      "en_name": "Radi"
+    },
+    "character2": {
+      "name": "사토",
+      "en_name": "Sato"
+    }
   },
   "news": {
     "title": "뉴스"
