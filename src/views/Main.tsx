@@ -7,13 +7,13 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 import Header from "../components/Header";
-import StoryContent from "../components/StoryContent";
 import NewsContent from "../components/NewsContent";
 import CharacterContainer from "../components/CharacterContent";
 
 import BackgroundImage from "../assets/background.png";
 import Character1 from "../assets/character/1.png";
 import Character2 from "../assets/character/2.png";
+import {IParallax, Parallax, ParallaxLayer} from "@react-spring/parallax";
 
 const Content = styled.div`
   margin: auto;
@@ -86,9 +86,51 @@ const MemberSection = styled(SecondSection)`
   flex-direction: column;
 `;
 
+const StoryContainer = styled.div`
+  display: block;
+  flex: 1;
+  background: #efefef;
+`;
+
+const StoryTitle = styled.h1`
+	flex: 1;
+  background-color: #333;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  white-space: pre-wrap;
+  line-height: 5.8rem;
+
+	font-size: 4.6rem;
+	font-weight: bold;
+	
+	transition: all 0.3s ease;
+
+	@media (max-width: 768px) {
+    line-height: 2.6rem;
+		font-size: 1.7rem;
+    padding: 0.25rem 0.7rem;
+	}
+`;
+
+const StoryDescription = styled.p`
+  color: #333;
+  font-size: 1.25rem;
+  white-space: pre-wrap;
+  line-height: 1.7rem;
+  margin: 3rem 0px;
+
+	transition: all 0.3s ease;
+
+	@media (max-width: 768px) {
+		padding: 0px;
+		font-size: 1rem;
+	}
+`;
+
 
 const Main: React.FC = () => {
   const {t} = useTranslation();
+  const parallax = useRef<IParallax>(null!);
   const containerRef = useRef<HTMLDivElement>(null);
   const [{ x, y }, api] = useSpring(
     () => ({
@@ -107,15 +149,15 @@ const Main: React.FC = () => {
     const height = containerRef.current?.clientHeight;
 
     if (width && height) {
-      const px = (e.clientX / width) * 2 - 1;
-      const py = (e.clientY / height) * 2 - 1;
+      const px = (e.clientX / width);
+      const py = (e.clientY / height);
 
       api.start({ x: px, y: py });
     }
   };
 
   return (
-    <>
+    <Parallax ref={parallax} pages={3.5}>
       <Particles
         init={particlesInit}
         options={{
@@ -131,6 +173,7 @@ const Main: React.FC = () => {
               value: ["#1A3A4F", "#519FAB", "#8A92A5", "#FFE3A4", "#F5A67F", "#FF6F6E"]
             },
             size: {
+
               value: 70,
               random: true,
             },
@@ -173,54 +216,82 @@ const Main: React.FC = () => {
         }}
       />
       <animated.div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
         style={{
-          display: 'block',
-
-          backgroundImage: `${BackgroundImage}`,
-          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${BackgroundImage})`,
           backgroundSize: 'max(105vw, 105vh) max(105vw, 105vh)',
-          backgroundAttachment: 'fixed'
+          backgroundAttachment: 'fixed',
+          backgroundRepeat: 'no-repeat',
         }}
       >
-        <Content>
-          <Header />
+        <Content
+          ref={containerRef}
+          onMouseMove={handleMouseMove}
+          style={{
+            height: '100vh',
+          }}
+        >
+          <Header parallax={parallax}/>
+          <ParallaxLayer offset={0.1} speed={-0.2}
+            style={{
+              display: 'block',
+              minHeight: '800px',
+            }}
+          >
           <animated.div
             style={{
               display: 'flex',
               position: 'relative',
               zIndex: 2,
 
-              height: '100vh',
-              minHeight: '800px',
-              maxHeight: '1100px',
-
               justifyContent: 'center',
 
               rotateX: y.interpolate({
                 range: [0, 1],
-                output: [0, -15]
+                output: [-15, 0]
               }),
               rotateY: x.interpolate({
                 range: [0, 1],
-                output: [0, 15]
-              })
+                output: [15, -15]
+              }),
+              translateX: x.interpolate({
+                range: [0, 1],
+                output: [-5, 5]
+              }),
+              translateY: y.interpolate({
+                range: [0, 1],
+                output: [-5, 5]
+              }),
             }}
           >
             <Char1 src={Character1} alt="character1" />
             <Char2 src={Character2} alt="character2" />
           </animated.div>
+          </ParallaxLayer>
         </Content>
 
-        <StoryContent />
-        <MemberSection id="member">
-          <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
-          <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
-        </MemberSection>
+        <ParallaxLayer factor={2} offset={1} speed={-0.05}>
+          <StoryContainer id="story">
+            <Content>
+              <StoryTitle>{t("story.title")}</StoryTitle>
+            </Content>
+            <Content>
+              <StoryDescription>{t("story.description")}</StoryDescription>
+            </Content>
+          </StoryContainer>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={2} speed={-0.05}>
+          <MemberSection id="member">
+              <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
+              <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
+          </MemberSection>
+        </ParallaxLayer>
+
+      <ParallaxLayer offset={3} speed={-0.05}>
         <NewsContent />
+      </ParallaxLayer>
       </animated.div>
-    </>
+    </Parallax>
   );
 };
 

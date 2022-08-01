@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useRef} from "react";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import { HashLink } from 'react-router-hash-link';
 
 import Logo from "../assets/logo.png";
+import {IParallax} from "@react-spring/parallax";
 
 const Container = styled.div`
 
@@ -41,7 +41,7 @@ const SubHeader = styled.div`
 	backdrop-filter: blur(10px);
 `;
 
-const TabItem = styled(HashLink)`
+const TabItem = styled.button`
 	font-size: 1.2rem;
   display: flex;
   color: #333;
@@ -49,6 +49,8 @@ const TabItem = styled(HashLink)`
   padding: 10px 15px;
 	text-decoration: none;
 	background-color: #9734B300;
+  border: 0px;
+  cursor: pointer;
 
   transition: all 0.3s ease-out;
 
@@ -68,15 +70,25 @@ const TabItem = styled(HashLink)`
 	}
 `;
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  parallax: any;
+}
+
+const Header: React.FC<HeaderProps> = ({parallax}) => {
   const {t} = useTranslation();
   return (
     <Container>
       <Title src={Logo} alt={t("main.title")}/>	
       <SubHeader>
-        <TabItem smooth to={"#story"}>{t("header.story")}</TabItem>
-        <TabItem smooth to={"#member"}>{t("header.member")}</TabItem>
-        <TabItem smooth to={"#news"}>{t("header.news")}</TabItem>
+        <TabItem onClick={() => {
+          parallax.current.scrollTo(1);
+        }}>{t("header.story")}</TabItem>
+        <TabItem onClick={() => {
+          parallax.current.scrollTo(2);
+        }}>{t("header.member")}</TabItem>
+        <TabItem onClick={() => {
+          parallax.current.scrollTo(3);
+        }}>{t("header.news")}</TabItem>
       </SubHeader>
     </Container>
   );
