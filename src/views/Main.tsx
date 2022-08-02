@@ -90,6 +90,7 @@ const StoryContainer = styled.div`
   display: block;
   flex: 1;
   background: #efefef;
+  height: 200vh;
 `;
 
 const StoryTitle = styled.h1`
@@ -124,7 +125,41 @@ const StoryDescription = styled.p`
 	@media (max-width: 768px) {
 		padding: 0px;
 		font-size: 1rem;
+    line-height: 1.3rem;
+    margin: 0.5rem 0px;
 	}
+`;
+
+const SecondaryStoryTitle = styled(StoryDescription)`
+  color: #8D53A1;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  word-break: keep-all;
+
+  line-height: 1.6rem;
+  
+  padding: 2rem 0px;
+`;
+
+const FadeInContainer = styled.div<{fadeIn: boolean}>`
+  opacity: ${({fadeIn}) => fadeIn ? 1 : 0};
+  transition: all 0.3s ease;
+`;
+
+const FadeInSubTitle = styled(StoryDescription)`
+  padding: 1rem 0px;
+  color: #FC9BC9;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  word-break: keep-all;
+  line-height: 3rem;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
 `;
 
 
@@ -247,11 +282,11 @@ const Main: React.FC = () => {
 
               rotateX: y.interpolate({
                 range: [0, 1],
-                output: [-15, 0]
+                output: [-7, 0]
               }),
               rotateY: x.interpolate({
                 range: [0, 1],
-                output: [15, -15]
+                output: [10, 0]
               }),
               translateX: x.interpolate({
                 range: [0, 1],
@@ -269,18 +304,27 @@ const Main: React.FC = () => {
           </ParallaxLayer>
         </Content>
 
-        <ParallaxLayer factor={2} offset={1} speed={-0.05}>
+        <ParallaxLayer factor={1.7} offset={0.99} speed={0.5}>
           <StoryContainer id="story">
             <Content>
               <StoryTitle>{t("story.title")}</StoryTitle>
             </Content>
             <Content>
               <StoryDescription>{t("story.description")}</StoryDescription>
+              <SecondaryStoryTitle>{t("story.secondary_title")}</SecondaryStoryTitle>
             </Content>
+            <FadeInContainer
+              fadeIn={(parallax.current ? (parallax.current.current / parallax.current.space) : 0) >= 0.5 ? true : false}
+            >
+              <>
+                {console.log(parallax.current && parallax.current.content)}
+                <FadeInSubTitle>{t("story.fadein_subtitle")}</FadeInSubTitle>
+              </>
+            </FadeInContainer>
           </StoryContainer>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={2} speed={-0.05}>
+        <ParallaxLayer offset={1.8} speed={0.5}>
           <MemberSection id="member">
               <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
               <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
