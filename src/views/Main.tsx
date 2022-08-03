@@ -84,13 +84,7 @@ const Char2 = styled.img`
 const MemberSection = styled(SecondSection)`
   display: flex;
   flex-direction: column;
-`;
-
-const StoryContainer = styled.div`
-  display: block;
-  flex: 1;
-  background: #efefef;
-  height: 200vh;
+  opacity: 0.7;
 `;
 
 const StoryTitle = styled.h1`
@@ -142,11 +136,6 @@ const SecondaryStoryTitle = styled(StoryDescription)`
   padding: 2rem 0px;
 `;
 
-const FadeInContainer = styled.div<{fadeIn: boolean}>`
-  opacity: ${({fadeIn}) => fadeIn ? 1 : 0};
-  transition: all 0.3s ease;
-`;
-
 const FadeInSubTitle = styled(StoryDescription)`
   padding: 1rem 0px;
   color: #FC9BC9;
@@ -167,6 +156,10 @@ const Main: React.FC = () => {
   const {t} = useTranslation();
   const parallax = useRef<IParallax>(null!);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = () => {
+      return window.innerWidth < 768;
+  };
+  const [{opacity}, fadeInApi] = useSpring(() => ({opacity: 0}));
   const [{ x, y }, api] = useSpring(
     () => ({
       x: 0,
@@ -191,8 +184,23 @@ const Main: React.FC = () => {
     }
   };
 
+  const scrollHandler = () => {
+    if(isMobile()) {
+      fadeInApi.start({
+        opacity: parallax.current.current / parallax.current.space >= 1 ? 1 : 0
+      });
+    }
+    else {
+      fadeInApi.start({
+        opacity: parallax.current.current / parallax.current.space >= 1.05 ? 1 : 0
+      });
+    }
+  };
+
   return (
-    <Parallax ref={parallax} pages={3.5}>
+    <Parallax ref={parallax} pages={3.5} onScrollCapture={() => {
+      scrollHandler();
+    }}>
       <Particles
         init={particlesInit}
         options={{
@@ -265,7 +273,7 @@ const Main: React.FC = () => {
             height: '100vh',
           }}
         >
-          <Header parallax={parallax}/>
+          <Header parallax={parallax} isMobile={isMobile()}/>
           <ParallaxLayer offset={0.1} speed={-0.2}
             style={{
               display: 'block',
@@ -304,34 +312,47 @@ const Main: React.FC = () => {
           </ParallaxLayer>
         </Content>
 
-        <ParallaxLayer factor={1.7} offset={0.99} speed={0.5}>
-          <StoryContainer id="story">
+        <ParallaxLayer factor={1.7} offset={0.99} speed={0.5} style={{
+          zIndex: 2,
+        }}>
+          <animated.div id="story"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              flex: 1,
+              background: '#efefef',
+              justifyContent: 'space-around',
+              height: isMobile() ? `${(768 / (window.innerWidth)) * 30}em` : `130vh`,
+            }}
+          >
             <Content>
               <StoryTitle>{t("story.title")}</StoryTitle>
-            </Content>
-            <Content>
               <StoryDescription>{t("story.description")}</StoryDescription>
               <SecondaryStoryTitle>{t("story.secondary_title")}</SecondaryStoryTitle>
             </Content>
-            <FadeInContainer
-              fadeIn={(parallax.current ? (parallax.current.current / parallax.current.space) : 0) >= 0.5 ? true : false}
+            <animated.div
+              style={{opacity, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
             >
-              <>
-                {console.log(parallax.current && parallax.current.content)}
                 <FadeInSubTitle>{t("story.fadein_subtitle")}</FadeInSubTitle>
-              </>
-            </FadeInContainer>
-          </StoryContainer>
+            </animated.div>
+          </animated.div>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={1.8} speed={0.5}>
+        <ParallaxLayer factor={isMobile() ? 2 : 1} offset={isMobile() ? 1.64 : 1.52} speed={0} style={{
+          zIndex: 1
+        }}>
           <MemberSection id="member">
               <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
-              <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
           </MemberSection>
         </ParallaxLayer>
 
-      <ParallaxLayer offset={3} speed={-0.05}>
+        {/*<ParallaxLayer factor={isMobile() ? 2 : 1} offset={isMobile() ? 1.5 : 1.7} speed={0.5}>*/}
+        {/*  <MemberSection id="member">*/}
+        {/*    <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>*/}
+        {/*  </MemberSection>*/}
+        {/*</ParallaxLayer>*/}
+
+      <ParallaxLayer offset={3} speed={-0.005}>
         <NewsContent />
       </ParallaxLayer>
       </animated.div>

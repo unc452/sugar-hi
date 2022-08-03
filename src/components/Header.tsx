@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 
 import Logo from "../assets/logo.png";
-import {IParallax} from "@react-spring/parallax";
 
 const Container = styled.div`
 
@@ -72,9 +71,10 @@ const TabItem = styled.button`
 
 interface HeaderProps {
   parallax: any;
+  isMobile: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({parallax}) => {
+const Header: React.FC<HeaderProps> = ({parallax, isMobile}) => {
   const {t} = useTranslation();
   return (
     <Container>
@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({parallax}) => {
           parallax.current.scrollTo(0.67);
         }}>{t("header.story")}</TabItem>
         <TabItem onClick={() => {
-          parallax.current.scrollTo(1.54);
+          parallax.current.scrollTo(isMobile ? 1.65 : 1.53);
         }}>{t("header.member")}</TabItem>
         <TabItem onClick={() => {
           parallax.current.scrollTo(3);
