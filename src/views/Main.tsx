@@ -84,7 +84,7 @@ const Char2 = styled.img`
 const MemberSection = styled(SecondSection)`
   display: flex;
   flex-direction: column;
-  opacity: 0.7;
+  background-color: #efefef;
 `;
 
 const StoryTitle = styled.h1`
@@ -338,19 +338,14 @@ const Main: React.FC = () => {
           </animated.div>
         </ParallaxLayer>
 
-        <ParallaxLayer factor={isMobile() ? 2 : 1} offset={isMobile() ? 1.64 : 1.52} speed={0} style={{
+        <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 1.64 : 1.43} speed={0} style={{
           zIndex: 1
         }}>
           <MemberSection id="member">
-              <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
+            <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
+            <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
           </MemberSection>
         </ParallaxLayer>
-
-        {/*<ParallaxLayer factor={isMobile() ? 2 : 1} offset={isMobile() ? 1.5 : 1.7} speed={0.5}>*/}
-        {/*  <MemberSection id="member">*/}
-        {/*    <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>*/}
-        {/*  </MemberSection>*/}
-        {/*</ParallaxLayer>*/}
 
       <ParallaxLayer offset={3} speed={-0.005}>
         <NewsContent />

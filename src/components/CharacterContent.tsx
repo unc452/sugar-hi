@@ -2,16 +2,20 @@ import React from 'react';
 import styled from "styled-components";
 
 const Containter = styled.div`
+  background-color: #efefef;
+  height: 140vh;
+  padding: 20vh 0px;
+  flex: 1;
   display: block;
-  background-color: #dfdfdf;
-  height: 70vh;
 `;
 
 const Content = styled.div`
   margin: auto;
+  height: 100%;
   max-width: 768px;
-  padding: 0px 1.5rem;
+  padding: 10vh 1.5rem;
   overflow: hidden;
+  background-color: #61dafb;
 `;
 
 const CharacterImage = styled.img`
