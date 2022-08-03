@@ -20,8 +20,10 @@ const Content = styled.div`
 const CharacterInnerContent = styled.div`
 `;
 
-const CharacterImage = styled.img`
-  height: 10vh;
+const CharacterImage = styled.img<{left: number}>`
+  height: 130vh;
+  margin-top: 100vh;
+  margin-right: ${({left}) => left}px;
 `;
 
 const DescriptionContainer = styled.div`
@@ -36,14 +38,15 @@ const Description = styled.div`
 type CharacterProps = {
   characterImg: string;
   name: string;
+  left: number;
 };
 
-const CharacterContent: React.FC<CharacterProps> = ({characterImg, name}) => {
+const CharacterContent: React.FC<CharacterProps> = ({characterImg, name, left}) => {
   return (
     <Containter>
       <Content>
         <CharacterInnerContent>
-          <CharacterImage src={characterImg} />
+          <CharacterImage src={characterImg} left={left}/>
           <DescriptionContainer>
             <Description>{name}</Description>
           </DescriptionContainer>

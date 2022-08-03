@@ -346,8 +346,8 @@ const Main: React.FC = () => {
           zIndex: 1
         }}>
           <MemberSection id="member">
-            <CharacterContainer characterImg={Character1} name={t('member.character1.name')}/>
-            <CharacterContainer characterImg={Character2} name={t('member.character2.name')}/>
+            <CharacterContainer characterImg={Character1} name={t('member.character1.name')} left={370}/>
+            <CharacterContainer characterImg={Character2} name={t('member.character2.name')} left={230}/>
           </MemberSection>
         </ParallaxLayer>
 
