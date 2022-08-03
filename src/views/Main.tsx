@@ -85,6 +85,10 @@ const MemberSection = styled(SecondSection)`
   display: flex;
   flex-direction: column;
   background-color: #efefef;
+  height: 200vh;
+  padding: 20vh 0px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StoryTitle = styled.h1`
@@ -338,7 +342,7 @@ const Main: React.FC = () => {
           </animated.div>
         </ParallaxLayer>
 
-        <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 1.64 : 1.43} speed={0} style={{
+        <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 1.14 : 1.02} speed={0} style={{
           zIndex: 1
         }}>
           <MemberSection id="member">

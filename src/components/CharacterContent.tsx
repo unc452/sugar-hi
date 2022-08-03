@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 const Containter = styled.div`
   background-color: #efefef;
-  height: 140vh;
-  padding: 20vh 0px;
-  flex: 1;
+  height: 70vh;
   display: block;
 `;
 
@@ -13,9 +11,13 @@ const Content = styled.div`
   margin: auto;
   height: 100%;
   max-width: 768px;
-  padding: 10vh 1.5rem;
   overflow: hidden;
-  background-color: #61dafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CharacterInnerContent = styled.div`
 `;
 
 const CharacterImage = styled.img`
@@ -40,10 +42,12 @@ const CharacterContent: React.FC<CharacterProps> = ({characterImg, name}) => {
   return (
     <Containter>
       <Content>
-        <CharacterImage src={characterImg} />
-        <DescriptionContainer>
-          <Description>{name}</Description>
-        </DescriptionContainer>
+        <CharacterInnerContent>
+          <CharacterImage src={characterImg} />
+          <DescriptionContainer>
+            <Description>{name}</Description>
+          </DescriptionContainer>
+        </CharacterInnerContent>
       </Content>
     </Containter>
   );
