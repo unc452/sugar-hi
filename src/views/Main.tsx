@@ -326,7 +326,7 @@ const Main: React.FC = () => {
               flex: 1,
               background: '#efefef',
               justifyContent: 'space-around',
-              height: isMobile() ? `${(768 / (window.innerWidth)) * 30}em` : `130vh`,
+              height: isMobile() ? `${(768 / (window.innerWidth)) * 25}em` : `130vh`,
             }}
           >
             <Content>
@@ -346,8 +346,22 @@ const Main: React.FC = () => {
           zIndex: 1
         }}>
           <MemberSection id="member">
-            <CharacterContainer characterImg={Character1} name={t('member.character1.name')} left={370}/>
-            <CharacterContainer characterImg={Character2} name={t('member.character2.name')} left={230}/>
+            <CharacterContainer characterImg={Character1} name={t('member.character1.name')}
+                                enName={t('member.character1.en_name')} right={-320}
+                                introduce={t('member.character1.introduce')}
+                                message={t('member.character1.message')}
+                                age={t('member.character1.age')}
+                                weight={t('member.character1.weight')}
+                                height={t('member.character1.height')}
+            />
+            <CharacterContainer characterImg={Character2} name={t('member.character2.name')}
+                                enName={t('member.character2.en_name')} right={-230}
+                                introduce={t('member.character2.introduce')}
+                                message={t('member.character2.message')}
+                                age={t('member.character2.age')}
+                                weight={t('member.character2.weight')}
+                                height={t('member.character2.height')}
+            />
           </MemberSection>
         </ParallaxLayer>
 

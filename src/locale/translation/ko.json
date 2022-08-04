@@ -17,11 +17,21 @@
     "title": "멤버",
     "character1": {
       "name": "라디",
-      "en_name": "Radi"
+      "en_name": "Radi",
+      "introduce": "\"나는 누구, 여긴 어디?\" 사연있는 지박령",
+      "message": "나와 함께 노래를 한다면 성불하도록 할게!",
+      "age": "???",
+      "height": "186",
+      "weight" : "???"
     },
     "character2": {
       "name": "사토",
-      "en_name": "Sato"
+      "en_name": "Sato",
+      "introduce": "\"귀신을 볼 수 있어?!\" 화나면 무서운 모범생",
+      "message": "너 도대체 언제 성불할거야?!",
+      "age": "17",
+      "height": "155",
+      "weight" : "???"
     }
   },
   "news": {
