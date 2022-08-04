@@ -5,20 +5,31 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px;
   z-index: 4;
+  background-color: #EFEFEF;
+  color: #333;
+  
 
   @media (max-width: 768px) {
     padding: 20px 0px;
   }
 `;
 
+const Copyright = styled.p`
+  padding: 20px 0px;
+`;
+
 const Footer: React.FC = () => {
-  return <Container>
-    <p></p>
-  </Container>;
+  return (
+    <Container>
+      <Copyright>
+        Copyright 2022. SUGAR-HI All rights reserved.
+      </Copyright>
+    </Container>
+  );
 };
 
 export default Footer;

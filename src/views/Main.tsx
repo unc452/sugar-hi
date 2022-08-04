@@ -7,6 +7,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import NewsContent from "../components/NewsContent";
 import CharacterContainer from "../components/CharacterContent";
 
@@ -89,6 +90,10 @@ const MemberSection = styled(SecondSection)`
   padding: 20vh 0px;
   justify-content: center;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    
+  }
 `;
 
 const StoryTitle = styled.h1`
@@ -191,7 +196,7 @@ const Main: React.FC = () => {
   const scrollHandler = () => {
     if(isMobile()) {
       fadeInApi.start({
-        opacity: parallax.current.current / parallax.current.space >= 1 ? 1 : 0
+        opacity: parallax.current.current / parallax.current.space >= 0.85 ? 1 : 0
       });
     }
     else {
@@ -202,7 +207,7 @@ const Main: React.FC = () => {
   };
 
   return (
-    <Parallax ref={parallax} pages={3.5} onScrollCapture={() => {
+    <Parallax ref={parallax} pages={isMobile() ? 4.15 : 3.69} onScrollCapture={() => {
       scrollHandler();
     }}>
       <Particles
@@ -346,28 +351,41 @@ const Main: React.FC = () => {
           zIndex: 1
         }}>
           <MemberSection id="member">
-            <CharacterContainer characterImg={Character1} name={t('member.character1.name')}
-                                enName={t('member.character1.en_name')} right={-320}
-                                introduce={t('member.character1.introduce')}
-                                message={t('member.character1.message')}
-                                age={t('member.character1.age')}
-                                weight={t('member.character1.weight')}
-                                height={t('member.character1.height')}
+            <CharacterContainer
+              index={0}
+              color={'#8F4CB0'} subColor={'#644E6F'} sub2Color={'#373138'}
+              textColor={'#fff'} textSubColor={'#fff'} textSub2Color={'#fff'}
+              characterImg={Character1} name={t('member.character1.name')}
+              enName={t('member.character1.en_name')} right={290} imgMobileHeight={120} imgHeight={1300} top={910}
+              introduce={t('member.character1.introduce')}
+              message={t('member.character1.message')}
+              age={t('member.character1.age')}
+              weight={t('member.character1.weight')}
+              height={t('member.character1.height')}
             />
-            <CharacterContainer characterImg={Character2} name={t('member.character2.name')}
-                                enName={t('member.character2.en_name')} right={-230}
-                                introduce={t('member.character2.introduce')}
-                                message={t('member.character2.message')}
-                                age={t('member.character2.age')}
-                                weight={t('member.character2.weight')}
-                                height={t('member.character2.height')}
+            <CharacterContainer
+              index={1}
+              color={'#F35D8D'} subColor={'#F2BBC5'} sub2Color={'#AE284D'}
+              textColor={'#fff'} textSubColor={'#fff'} textSub2Color={'#fff'}
+              characterImg={Character2} name={t('member.character2.name')}
+              enName={t('member.character2.en_name')} right={320} imgMobileHeight={100} imgHeight={1000} top={420}
+              introduce={t('member.character2.introduce')}
+              message={t('member.character2.message')}
+              age={t('member.character2.age')}
+              weight={t('member.character2.weight')}
+              height={t('member.character2.height')}
             />
           </MemberSection>
         </ParallaxLayer>
 
-      <ParallaxLayer offset={3} speed={-0.005}>
-        <NewsContent />
-      </ParallaxLayer>
+        <ParallaxLayer offset={isMobile() ? 3.4 : 3} speed={-0.005} style={{zIndex: 6}}>
+          <NewsContent isMobile={isMobile()} />
+        </ParallaxLayer>
+
+
+        <ParallaxLayer offset={isMobile() ? 3.98 : 3.61} speed={0} style={{zIndex: 5}}>
+          <Footer />
+        </ParallaxLayer>
       </animated.div>
     </Parallax>
   );
