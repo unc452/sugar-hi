@@ -14,13 +14,12 @@ const Containter = styled.div`
 const Content = styled.div<{index: number}>`
   margin: auto;
   height: 100%;
-  overflow: hidden;
+  //overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   
   @media (max-width: 768px) {
-    overflow: hidden;
     margin-top: ${({index}) => index == 1 ? -50 : 0}vh;
   }
 `;
@@ -40,26 +39,27 @@ const CharacterInnerContent = styled.div`
   }
 `;
 
-const CharacterImage = styled.img<{right: number, imgHeight: number, top: number, imgMobileHeight: number}>`
+const CharacterImage = styled.img<{right: number, imgHeight: number, top: number, imgMobileHeight: number, index: number}>`
   height: ${({imgHeight}) => imgHeight}px;
   margin-top: ${({top}) => top}px;
   margin-right: ${({right}) => right}px;
   z-index: 5;
   display: block;
+  background-color: #EFEFEF;
   
   transition: all 0.3s ease-out;
   
   @media (max-width: 768px) {
     height: ${({imgMobileHeight}) => imgMobileHeight}vh;
     margin-right: 0px;
-    margin-top: 90vh;
+    margin-top: ${({index}) => index == 1 ? 125 : 90}vh;
     z-index: 4;
   }
 `;
 
 const DescriptionContainer = styled.div<{index: number}>`
   position: absolute;
-  z-index: 4;
+  z-index: 5;
   display: flex;
   flex: 1;
   width: 360px;
@@ -72,7 +72,7 @@ const DescriptionContainer = styled.div<{index: number}>`
     height: 25vh;
     z-index: 5;
     justify-content: center;
-    margin-bottom: ${({index}) => index == 1 ? 10 : 30}vh;
+    margin-bottom: ${({index}) => index == 1 ? 23 : 30}vh;
   }
 `;
 
@@ -151,7 +151,7 @@ const CharacterContent: React.FC<CharacterProps> = ({characterImg, name, enName,
     <Containter>
       <Content index={index}>
         <CharacterInnerContent>
-          <CharacterImage src={characterImg} right={right} imgHeight={imgHeight} top={top} imgMobileHeight={imgMobileHeight}/>
+          <CharacterImage src={characterImg} right={right} imgHeight={imgHeight} top={top} imgMobileHeight={imgMobileHeight} index={index}/>
           <DescriptionContainer index={index}>
             <Name>{name}({enName})</Name>
             <IntroduceDescription>{introduce}</IntroduceDescription>

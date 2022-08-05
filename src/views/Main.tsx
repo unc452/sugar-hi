@@ -41,15 +41,6 @@ const MainSection = styled.div`
   }
 `;
 
-const SecondSection = styled.div`
-  position: relative;
-  display: flex;
-  height: 100vh;
-
-  background: #efefef;
-  z-index: 3;
-`;
-
 const Char1 = styled.img`
   top: calc(-30px + 5vh);
   margin: 0px 0px 0px -80px;
@@ -79,20 +70,6 @@ const Char2 = styled.img`
     top: 170px;
     margin: 0px 0px 0px calc(8em + 14vw);
     width: 380px;
-  }
-`;
-
-const MemberSection = styled(SecondSection)`
-  display: flex;
-  flex-direction: column;
-  background-color: #efefef;
-  height: 200vh;
-  padding: 20vh 0px;
-  justify-content: center;
-  align-items: center;
-  
-  @media (max-width: 768px) {
-    
   }
 `;
 
@@ -168,7 +145,8 @@ const Main: React.FC = () => {
   const isMobile = () => {
       return window.innerWidth < 768;
   };
-  const [{opacity}, fadeInApi] = useSpring(() => ({opacity: 0}));
+  const [fadeIn, fadeInApi] = useSpring(() => ({opacity: 0}));
+  const [member, memberApi] = useSpring(() => ({opacity: 0}));
   const [{ x, y }, api] = useSpring(
     () => ({
       x: 0,
@@ -198,10 +176,16 @@ const Main: React.FC = () => {
       fadeInApi.start({
         opacity: parallax.current.current / parallax.current.space >= 0.85 ? 1 : 0
       });
+      memberApi.start({
+        opacity: parallax.current.current / parallax.current.space > 0.5 ? 1 : 0
+      });
     }
     else {
       fadeInApi.start({
         opacity: parallax.current.current / parallax.current.space >= 1.05 ? 1 : 0
+      });
+      memberApi.start({
+        opacity: parallax.current.current / parallax.current.space > 0.5 ? 1 : 0
       });
     }
   };
@@ -340,17 +324,27 @@ const Main: React.FC = () => {
               <SecondaryStoryTitle>{t("story.secondary_title")}</SecondaryStoryTitle>
             </Content>
             <animated.div
-              style={{opacity, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+              style={{opacity: fadeIn.opacity, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
             >
                 <FadeInSubTitle>{t("story.fadein_subtitle")}</FadeInSubTitle>
             </animated.div>
           </animated.div>
         </ParallaxLayer>
 
-        <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 1.14 : 1.02} speed={0} style={{
+        <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 0.8 : 1.02} speed={0} style={{
           zIndex: 2
         }}>
-          <MemberSection id="member">
+          <animated.div id="member" style={{
+            opacity: member.opacity,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: '#efefef',
+            height: '200vh',
+            padding: '20vh 0px',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
             <CharacterContainer
               index={0}
               color={'#8F4CB0'} subColor={'#644E6F'} sub2Color={'#373138'}
@@ -375,7 +369,7 @@ const Main: React.FC = () => {
               weight={t('member.character2.weight')}
               height={t('member.character2.height')}
             />
-          </MemberSection>
+          </animated.div>
         </ParallaxLayer>
 
         <ParallaxLayer offset={isMobile() ? 3.4 : 3} speed={-0.0005} style={{zIndex: 6}}>
