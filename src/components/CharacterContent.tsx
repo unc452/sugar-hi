@@ -14,12 +14,13 @@ const Containter = styled.div`
 const Content = styled.div<{index: number}>`
   margin: auto;
   height: 100%;
-  //overflow: hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   
   @media (max-width: 768px) {
+    overflow: visible;
     margin-top: ${({index}) => index == 1 ? -50 : 0}vh;
   }
 `;
@@ -45,11 +46,11 @@ const CharacterImage = styled.img<{right: number, imgHeight: number, top: number
   margin-right: ${({right}) => right}px;
   z-index: 5;
   display: block;
-  background-color: #EFEFEF;
   
   transition: all 0.3s ease-out;
   
   @media (max-width: 768px) {
+    background-color: #EFEFEF;
     height: ${({imgMobileHeight}) => imgMobileHeight}vh;
     margin-right: 0px;
     margin-top: ${({index}) => index == 1 ? 125 : 90}vh;
@@ -59,7 +60,7 @@ const CharacterImage = styled.img<{right: number, imgHeight: number, top: number
 
 const DescriptionContainer = styled.div<{index: number}>`
   position: absolute;
-  z-index: 5;
+  z-index: 4;
   display: flex;
   flex: 1;
   width: 360px;
