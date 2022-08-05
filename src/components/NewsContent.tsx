@@ -44,7 +44,7 @@ const NewsContent: React.FC<NewsProps> = ({isMobile}) => {
                 noHeader={false}
                 noFooter={true}
                 lang={'ko'}
-                options={{height: isMobile ? 300 : 768, width: 768}}
+                options={{height: isMobile ? '73vh' : '58vh', width: 768}}
               />
             </Content>
         </SecondSection>

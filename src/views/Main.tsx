@@ -207,7 +207,7 @@ const Main: React.FC = () => {
   };
 
   return (
-    <Parallax ref={parallax} pages={isMobile() ? 4.15 : 3.69} onScrollCapture={() => {
+    <Parallax ref={parallax} pages={isMobile() ? 4.35 : 3.76} onScrollCapture={() => {
       scrollHandler();
     }}>
       <Particles
@@ -322,7 +322,7 @@ const Main: React.FC = () => {
         </Content>
 
         <ParallaxLayer factor={1.7} offset={0.99} speed={0.5} style={{
-          zIndex: 2,
+          zIndex: 3,
         }}>
           <animated.div id="story"
             style={{
@@ -348,7 +348,7 @@ const Main: React.FC = () => {
         </ParallaxLayer>
 
         <ParallaxLayer factor={isMobile() ? 4 : 2} offset={isMobile() ? 1.14 : 1.02} speed={0} style={{
-          zIndex: 1
+          zIndex: 2
         }}>
           <MemberSection id="member">
             <CharacterContainer
@@ -378,12 +378,12 @@ const Main: React.FC = () => {
           </MemberSection>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={isMobile() ? 3.4 : 3} speed={-0.005} style={{zIndex: 6}}>
+        <ParallaxLayer offset={isMobile() ? 3.4 : 3} speed={-0.0005} style={{zIndex: 6}}>
           <NewsContent isMobile={isMobile()} />
         </ParallaxLayer>
 
 
-        <ParallaxLayer offset={isMobile() ? 3.98 : 3.61} speed={0} style={{zIndex: 5}}>
+        <ParallaxLayer offset={isMobile() ? 4.55 : 3.77} speed={-0.5} style={{zIndex: 1}}>
           <Footer />
         </ParallaxLayer>
       </animated.div>

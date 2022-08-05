@@ -7,14 +7,16 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  //padding: 20px;
   z-index: 4;
   background-color: #EFEFEF;
   color: #333;
   
+  padding: 1.5vh 0px 100vh 0px;
+  
 
   @media (max-width: 768px) {
-    padding: 20px 0px;
+    padding: 1.5vh 0px 100vh 0px;
   }
 `;
 

@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({parallax, isMobile}) => {
           parallax.current.scrollTo(isMobile ? 1.48 : 1.53);
         }}>{t("header.member")}</TabItem>
         <TabItem onClick={() => {
-          parallax.current.scrollTo(3.2);
+          parallax.current.scrollTo(3.4);
         }}>{t("header.news")}</TabItem>
       </SubHeader>
     </Container>
